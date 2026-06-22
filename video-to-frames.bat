@@ -13,7 +13,7 @@ set "input_video_file=%~dpnx1"
 set "base_output_dir=%~dp1%~n1"
 set "output_dir=%base_output_dir%"
 set "ffmpeg_exe=ffmpeg"
-rem ffmpeg JPEG quality scale is 2-31, and 2 keeps high quality with smaller files than BMP.
+rem ffmpeg JPEG quality scale is 1-31, and 2 keeps high quality with smaller files than BMP.
 set "jpeg_quality=2"
 rem Safety limit to avoid an infinite loop when finding a unique output directory name.
 set "max_output_dir_attempts=1000"
