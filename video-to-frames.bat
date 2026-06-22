@@ -14,6 +14,7 @@ set "base_output_dir=%~dp1%~n1"
 set "output_dir=%base_output_dir%"
 set "ffmpeg_exe=ffmpeg"
 set "jpeg_quality=2"
+rem Safety limit to avoid an infinite loop when finding a unique output directory name.
 set "max_output_dir_attempts=1000"
 
 where "%ffmpeg_exe%" >nul 2>nul
