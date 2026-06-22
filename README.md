@@ -3,7 +3,7 @@ Easily convert any video to a sequence of images by right-clicking a video file 
 Every image represents a single frame from the video.
 
 ### Download
-Press the green button `Code` and then `Download ZIP`.
+Download the latest ZIP from the GitHub **Releases** page (Download section).
 
 ### Setup
 1. Extract the zip somewhere that will not be deleted.
@@ -16,7 +16,9 @@ By default this works with these file extensions:
 
 ### Notes
 - `install.bat` adds the context menu entry for the current user.
-- `video-to-frames.bat` creates a folder next to the video and exports each frame as a `.bmp` file.
+- `video-to-frames.bat` creates a folder next to the video and exports each frame as a `.jpg` file.
+- The output folder opens automatically after a successful conversion.
+- If the output folder name already exists, a numeric suffix is added automatically (for example `_2`, `_3`, ...).
 - `uninstall.bat` removes the context menu entry.
 
 ### More
