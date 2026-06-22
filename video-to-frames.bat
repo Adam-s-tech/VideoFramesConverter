@@ -14,6 +14,7 @@ set "base_output_dir=%~dp1%~n1"
 set "output_dir=%base_output_dir%"
 set "ffmpeg_exe=ffmpeg"
 set "jpeg_quality=2"
+set "max_output_dir_attempts=1000"
 
 where "%ffmpeg_exe%" >nul 2>nul
 if errorlevel 1 (
@@ -28,7 +29,7 @@ set /a "output_dir_search_attempts=0"
 :find_available_output_dir
 if exist "%output_dir%" (
     set /a "output_dir_search_attempts+=1"
-    if %output_dir_search_attempts% geq 10000 (
+    if %output_dir_search_attempts% geq %max_output_dir_attempts% (
         echo Error: could not find an available output folder name.
         pause
         exit /b 1
