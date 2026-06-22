@@ -15,6 +15,14 @@ if not exist "%command%" (
     exit /b 1
 )
 
+where "ffmpeg" >nul 2>nul
+if errorlevel 1 (
+    echo Warning: ffmpeg was not found in PATH.
+    echo Download ffmpeg here: https://ffmpeg.org/download.html
+    echo Installation will continue, but conversion needs ffmpeg to be installed.
+    echo.
+)
+
 for %%a in (%extensions%) do (
     reg add "HKCU\Software\Classes\SystemFileAssociations\%%a\shell\%handler_name%" /ve /d "Convert to Frames" /f >nul
     reg add "HKCU\Software\Classes\SystemFileAssociations\%%a\shell\%handler_name%\command" /ve /d "\"%command%\" \"%%1\"" /f >nul
