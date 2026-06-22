@@ -1,13 +1,23 @@
 @echo off
+setlocal EnableExtensions
 
-echo Run as administrator if it says "ERROR: Access is denied."
+rem Install the right-click context menu for common video formats.
+rem Run this script as administrator if Windows shows "Access is denied."
 
-pause
+set "script_dir=%~dp0"
+set "handler_name=VideoFramesConverter"
+set "command=%script_dir%video-to-frames.bat"
+set "extensions=.mp4 .mkv .mov .wmv .avi .flv .webm"
 
-set list=.mp4 .mkv .mov .wmv .avi .flv .mkv .webm 
-(for %%a in (%list%) do ( 
-	@Reg Add "HKCR\SystemFileAssociations\%%a\shell\VideoFramesConverter" /VE /D "Convert to Frames" /F >Nul
-	@Reg Add "HKCR\SystemFileAssociations\%%a\shell\VideoFramesConverter\command" /VE /D "\"%~dp0video-to-frames.bat\" \"%%1\"" /F >Nul
-))
+if not exist "%command%" (
+    echo Error: "%command%" was not found.
+    pause
+    exit /b 1
+)
 
+for %%a in (%extensions%) do (
+    reg add "HKCU\Software\Classes\SystemFileAssociations\%%a\shell\%handler_name%" /ve /d "Convert to Frames" /f >nul
+    reg add "HKCU\Software\Classes\SystemFileAssociations\%%a\shell\%handler_name%\command" /ve /d "\"%command%\" \"%%1\"" /f >nul
+)
+echo Installed context menu entries successfully.
 pause
